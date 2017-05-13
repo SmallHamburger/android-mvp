@@ -4,12 +4,11 @@ android {
     compileSdkVersion 23
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.jeson.com.jeson.mvp.jeson"
+        applicationId "com.jeson.mvp"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {

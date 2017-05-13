@@ -23,18 +23,34 @@ import java.util.concurrent.LinkedBlockingQueue;
 public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
     private static final String TAG = "BasicModel";
-    public static final int CACHED_THREAD = -1;
-    public static final int SINGLE_THREAD = 0;
+    /**
+     * 自动调整线程数量
+     */
+    public static final int CACHED_THREAD = 0;
+    /**
+     * 单线程
+     */
+    public static final int SINGLE_THREAD = 1;
     private boolean isDestroyed = false;
     private ExecutorService mExecutorService;
+    /**
+     * 用于子类传送消息, 运行在主线程, handleMessage()会推送至线程池中运行
+     */
     private Handler mWorkHandler;
     private IBasicHandler.Callback mWorkingCallback;
     private LinkedBlockingQueue<Message> mMessages;
 
+    /**
+     * 默认model层开启1个子线程
+     */
     public BasicModel() {
         this(SINGLE_THREAD);
     }
 
+    /**
+     * 可以根据给的线程数量设置model层子线程数量, 如果参数值为CACHED_THREAD, 则使用自动调整线程数量, 如果参数值为SINGLE_THREAD, 则为单线程, 如果是其他值则使用指定的线程数量
+     * @param nThreads
+     */
     public BasicModel(int nThreads) {
         if (nThreads == CACHED_THREAD) {
             mExecutorService = Executors.newCachedThreadPool();
@@ -45,6 +61,7 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         }
         mMessages = new LinkedBlockingQueue();
         mWorkHandler = new Handler();
+        //从任务队列中读取任务交给线程去执行
         new MessageThread().start();
     }
 
@@ -80,9 +97,9 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
     @Override
     public void onDestroy() {
-        isDestroyed = true;
-        mMessages.clear();
-        mExecutorService.shutdownNow();
+        isDestroyed = true; //标记当前状态为destroyed
+        mMessages.clear();//清理队列
+        mExecutorService.shutdownNow(); //关闭线程池
         mExecutorService = null;
 
     }
@@ -125,6 +142,8 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         public void run() {
             for (; !isDestroyed; ) {
                 try {
+                    // 如果队列有任务则take, 如果没有则阻塞
+                    // 如果有了新的任务进入, 则唤醒
                     mExecutorService.execute(new Runnable(mMessages.take()));
                 } catch (InterruptedException e) {
                     Log.w(TAG, "Taking message from message queue is interrupted");
