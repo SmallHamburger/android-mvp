@@ -9,9 +9,4 @@ import com.jeson.mvp.ILifeRecycle;
  */
 
 public interface IBasicPresenter extends IBasicHandler, ILifeRecycle {
-
-    /**
-     * 子线程回调时, 使接下来的代码运行在主线程
-     */
-    int MSG_ON_WORKING_CALL_ON_UI = 0xF0000001;
 }
