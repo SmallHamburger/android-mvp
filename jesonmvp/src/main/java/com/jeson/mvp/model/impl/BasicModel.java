@@ -1,8 +1,6 @@
 package com.jeson.mvp.model.impl;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
@@ -13,7 +11,6 @@ import com.jeson.mvp.model.IBasicModel;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 
 
 /**
@@ -38,7 +35,6 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
      */
     private Handler mWorkHandler;
     private IBasicHandler.Callback mWorkingCallback;
-    private LinkedBlockingQueue<Message> mMessages;
 
     /**
      * 默认model层开启1个子线程
@@ -59,10 +55,8 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         } else {
             mExecutorService = Executors.newFixedThreadPool(nThreads);
         }
-        mMessages = new LinkedBlockingQueue();
         mWorkHandler = new Handler();
         //从任务队列中读取任务交给线程去执行
-        new MessageThread().start();
     }
 
     protected android.os.Handler getWorkHandler(){
@@ -98,7 +92,6 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
     @Override
     public void onDestroy() {
         isDestroyed = true; //标记当前状态为destroyed
-        mMessages.clear();//清理队列
         mExecutorService.shutdownNow(); //关闭线程池
         mExecutorService = null;
 
@@ -120,6 +113,7 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         @Override
         public void run() {
             handleMessage(msg);
+            msg.recycle();
         }
     }
 
@@ -132,23 +126,19 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         @Override
         public void handleMessage(Message msg) {
             if (!isDestroyed) {
-                mMessages.offer(msg);
+                Message message = new Message();
+                message.copyFrom(msg);
+                mExecutorService.execute(new Runnable(message));
             }
         }
-    }
 
-    private class MessageThread extends Thread{
-        @Override
-        public void run() {
-            for (; !isDestroyed; ) {
-                try {
-                    // 如果队列有任务则take, 如果没有则阻塞
-                    // 如果有了新的任务进入, 则唤醒
-                    mExecutorService.execute(new Runnable(mMessages.take()));
-                } catch (InterruptedException e) {
-                    Log.w(TAG, "Taking message from message queue is interrupted");
-                    e.printStackTrace();
+        public void dispatchMessage(Message msg) {
+            if (msg.getCallback() != null) {
+                if (!isDestroyed){
+                    mExecutorService.execute(msg.getCallback());
                 }
+            } else {
+                super.dispatchMessage(msg);
             }
         }
     }
