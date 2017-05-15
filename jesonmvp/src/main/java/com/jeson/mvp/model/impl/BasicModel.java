@@ -3,7 +3,6 @@ package com.jeson.mvp.model.impl;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 
 import com.jeson.mvp.IBasicHandler;
 import com.jeson.mvp.ILifeRecycle;
@@ -45,6 +44,7 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
     /**
      * 可以根据给的线程数量设置model层子线程数量, 如果参数值为CACHED_THREAD, 则使用自动调整线程数量, 如果参数值为SINGLE_THREAD, 则为单线程, 如果是其他值则使用指定的线程数量
+     *
      * @param nThreads
      */
     public BasicModel(int nThreads) {
@@ -59,7 +59,7 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         //从任务队列中读取任务交给线程去执行
     }
 
-    protected android.os.Handler getWorkHandler(){
+    protected android.os.Handler getWorkHandler() {
         return mWorkHandler;
     }
 
@@ -68,26 +68,31 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
         mWorkingCallback = callback;
     }
 
-    protected IBasicHandler.Callback getWorkingCallback(){
+    protected IBasicHandler.Callback getWorkingCallback() {
         return mWorkingCallback;
     }
 
     protected abstract void handleMessage(Message msg);
 
     @Override
-    public void onCreate(Bundle bundle) {}
+    public void onCreate(Bundle bundle) {
+    }
 
     @Override
-    public void onStart() {}
+    public void onStart() {
+    }
 
     @Override
-    public void onResume() {}
+    public void onResume() {
+    }
 
     @Override
-    public void onPause() {}
+    public void onPause() {
+    }
 
     @Override
-    public void onStop() {}
+    public void onStop() {
+    }
 
     @Override
     public void onDestroy() {
@@ -98,7 +103,8 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
     }
 
     @Override
-    public void handleTask(Callback callback, int taskType, Bundle data) {}
+    public void handleTask(Callback callback, int taskType, Bundle data) {
+    }
 
     @Override
     public Object getData(int dataType, Bundle data) {
@@ -107,39 +113,35 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
     private class Runnable implements java.lang.Runnable {
         private Message msg;
+
         Runnable(Message msg) {
             this.msg = msg;
         }
+
         @Override
         public void run() {
             handleMessage(msg);
-            msg.recycle();
+            msg.recycle();// Message对象没有经过Looper循环, 需要手动回收
         }
     }
 
-    private class Handler extends android.os.Handler{
+    private class Handler extends android.os.Handler {
 
-        public Handler(){
+        public Handler() {
             super(Looper.getMainLooper());
         }
 
-        @Override
-        public void handleMessage(Message msg) {
-            if (!isDestroyed) {
-                Message message = new Message();
-                message.copyFrom(msg);
-                mExecutorService.execute(new Runnable(message));
-            }
-        }
-
         public void dispatchMessage(Message msg) {
-            if (msg.getCallback() != null) {
-                if (!isDestroyed){
+            if (!isDestroyed) {
+                if (msg.getCallback() != null) {
+                    // Looper会自动回收Message对象
                     mExecutorService.execute(msg.getCallback());
+                } else {
+                    // Looper会自动回收msg对象, 所以需要一个新的Message对象供我们的子线程使用
+                    mExecutorService.execute(new Runnable(Message.obtain(msg)));
                 }
-            } else {
-                super.dispatchMessage(msg);
             }
+
         }
     }
 }
