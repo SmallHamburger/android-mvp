@@ -564,7 +564,6 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
 
 
-
-  [1]: http://static.zybuluo.com/898801681/qgaa09mr7cpoop9ls4mr5kho/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [2]: http://static.zybuluo.com/898801681/fbye22yhffru68oy5j5cj509/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [3]: http://static.zybuluo.com/898801681/tebryvlbbu5sx6b769vzlr7n/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [1]: https://raw.githubusercontent.com/SmallHamburger/android-mvp/master/jesonmvp/doc/img/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [2]: https://raw.githubusercontent.com/SmallHamburger/android-mvp/master/jesonmvp/doc/img/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [3]: https://raw.githubusercontent.com/SmallHamburger/android-mvp/master/jesonmvp/doc/img/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
