@@ -114,14 +114,18 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
     protected void onSuccessCalledOnWorkThread(int dataType, Bundle data) {
         mCalledStatus.put(Thread.currentThread().getId(), true);
     }
+
     protected void onFailedCalledOnWorkThread(int dataType, Bundle data) {
         mCalledStatus.put(Thread.currentThread().getId(), true);
     }
+
     protected void onFailedCalledOnUIThread(int dataType, Bundle data) {
     }
+
     protected void onErrorCalledOnWorkThread(int dataType, Bundle data) {
         mCalledStatus.put(Thread.currentThread().getId(), true);
     }
+
     protected void onErrorCalledOnUIThread(int dataType, Bundle data) {
     }
 

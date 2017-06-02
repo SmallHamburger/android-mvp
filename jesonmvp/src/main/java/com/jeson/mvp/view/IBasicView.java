@@ -18,5 +18,4 @@ public interface IBasicView{
      */
     void onDataUpdate(Bundle data);
 
-
 }

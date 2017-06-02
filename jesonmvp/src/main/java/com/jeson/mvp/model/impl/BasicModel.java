@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
  * Created by jeson on 2017/5/10.
  */
 
-public abstract class BasicModel implements ILifeRecycle, IBasicModel {
+public abstract class BasicModel implements IBasicModel {
 
     private static final String TAG = "BasicModel";
     /**

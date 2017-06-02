@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- 由 Microsoft Visio 11.0, SVG Export, v1.0 生成 MVP架构示意图.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="6.85039in" height="4.92126in"
+		viewBox="0 0 493.228 354.331" xml:space="preserve" color-interpolation-filters="sRGB" class="st10">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(0):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {visibility:visible}
+		.st2 {fill:#cdcdcd;fill-opacity:0.5;stroke:#cdcdcd;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.5;stroke-width:0.25}
+		.st3 {fill:url(#grad30-6);stroke:#404040;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25}
+		.st4 {fill:#000000;font-family:宋体;font-size:1.33333em}
+		.st5 {font-family:Calibri;font-size:1em}
+		.st6 {fill:#000000;font-family:宋体;font-size:1.16666em}
+		.st7 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25}
+		.st8 {fill:#000000;font-family:Calibri;font-size:1.33333em}
+		.st9 {font-family:宋体;font-size:1em}
+		.st10 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Patterns_And_Gradients">
+		<linearGradient id="grad30-6" v:fillPattern="30" v:foreground="#f0f0f0" v:background="#ffffff" x1="0" y1="1" x2="0" y2="0">
+			<stop offset="0" style="stop-color:#f0f0f0;stop-opacity:1"/>
+			<stop offset="1" style="stop-color:#ffffff;stop-opacity:1"/>
+		</linearGradient>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<v:userDefs>
+			<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+			<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			<v:ud v:nameU="msvThemeOrder" v:val="VT0(0):26"/>
+		</v:userDefs>
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" transform="translate(184.252,-206.929)">
+			<title>圆形</title>
+			<desc>销售 (Presenter)</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="56.6929" cy="297.638" width="99.22" height="85.0394"/>
+			<g id="shadow1-2" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,1.44,1.44)" class="st1">
+				<path d="M0 297.64 A56.6929 56.6929 0 0 1 113.39 297.64 A56.6929 56.6929 0 1 1 0 297.64 Z" class="st2"/>
+			</g>
+			<path d="M0 297.64 A56.6929 56.6929 0 0 1 113.39 297.64 A56.6929 56.6929 0 1 1 0 297.64 Z" class="st3"/>
+			<text x="40.69" y="293.36" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>销售<v:newlineChar/><tspan
+						x="20.18" dy="1.233em" class="st5">(</tspan><tspan class="st5">Presenter</tspan><tspan class="st5">)</tspan></text>		</g>
+		<g id="shape2-11" v:mID="2" v:groupContext="shape" transform="translate(34.0157,-36.8504)">
+			<title>圆形.2</title>
+			<desc>客户 (View)</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="56.6929" cy="297.638" width="99.22" height="85.0394"/>
+			<g id="shadow2-12" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,1.44,1.44)" class="st1">
+				<path d="M0 297.64 A56.6929 56.6929 0 0 1 113.39 297.64 A56.6929 56.6929 0 1 1 0 297.64 Z" class="st2"/>
+			</g>
+			<path d="M0 297.64 A56.6929 56.6929 0 0 1 113.39 297.64 A56.6929 56.6929 0 1 1 0 297.64 Z" class="st3"/>
+			<text x="40.69" y="293.36" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>客户<v:newlineChar/><tspan
+						x="35.77" dy="1.233em" class="st5">(</tspan><tspan class="st5">View</tspan><tspan class="st5">)</tspan></text>		</g>
+		<g id="shape3-20" v:mID="3" v:groupContext="shape" transform="translate(340.157,-36.8504)">
+			<title>圆形.3</title>
+			<desc>研发 (Model)</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="56.6929" cy="297.638" width="99.22" height="85.0394"/>
+			<g id="shadow3-21" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,1.44,1.44)" class="st1">
+				<path d="M0 297.64 A56.6929 56.6929 0 0 1 113.39 297.64 A56.6929 56.6929 0 1 1 0 297.64 Z" class="st2"/>
+			</g>
+			<path d="M0 297.64 A56.6929 56.6929 0 0 1 113.39 297.64 A56.6929 56.6929 0 1 1 0 297.64 Z" class="st3"/>
+			<text x="40.69" y="293.36" class="st4" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>研发<v:newlineChar/><tspan
+						x="30.76" dy="1.233em" class="st5">(</tspan><tspan class="st5">Model</tspan><tspan class="st5">)</tspan></text>		</g>
+		<g id="shape4-29" v:mID="4" v:groupContext="shape" transform="translate(340.313,427.243) rotate(-45) scale(1,-1)">
+			<title>45 度单向箭头</title>
+			<desc>交付需求</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="47.7715" cy="328.274" width="95.55" height="52.1143"/>
+			<g id="shadow4-30" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,-2.84217E-014,-2.03647)" class="st1">
+				<path d="M0 328.27 L26.06 302.22 L26.06 319.41 L95.54 319.41 L95.54 337.13 L26.06 337.13 L26.06 354.33 L0 328.27 Z"
+						class="st2"/>
+			</g>
+			<path d="M0 328.27 L26.06 302.22 L26.06 319.41 L95.54 319.41 L95.54 337.13 L26.06 337.13 L26.06 354.33 L0 328.27 Z"
+					class="st3"/>
+			<text x="19.77" y="-323.61" transform="scale(1,-1)" class="st6" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>交付需求</text>		</g>
+		<g id="shape5-35" v:mID="5" v:groupContext="shape" transform="translate(-16.6914,-73.3843) rotate(-45) scale(-1,1)">
+			<title>45 度单向箭头.5</title>
+			<desc>我有新的需求</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="47.7715" cy="324.265" width="95.55" height="60.1319"/>
+			<g id="shadow5-36" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,0,2.03647)" class="st1">
+				<path d="M0 324.26 L30.07 294.2 L30.07 314.04 L95.54 314.04 L95.54 334.49 L30.07 334.49 L30.07 354.33 L0 324.26 Z"
+						class="st2"/>
+			</g>
+			<path d="M0 324.26 L30.07 294.2 L30.07 314.04 L95.54 314.04 L95.54 334.49 L30.07 334.49 L30.07 354.33 L0 324.26 Z"
+					class="st3"/>
+			<text x="-89.77" y="328.92" transform="scale(-1,1)" class="st6" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>我有新的需求</text>		</g>
+		<g id="shape6-41" v:mID="6" v:groupContext="shape" transform="translate(574.609,-8.69515) rotate(45) scale(-1,1)">
+			<title>45 度单向箭头.6</title>
+			<desc>需求开发出来</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="49.7509" cy="324.265" width="99.51" height="60.1319"/>
+			<g id="shadow6-42" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,-2.03647,0)" class="st1">
+				<path d="M0 324.26 L30.07 294.2 L30.07 314.04 L99.5 314.04 L99.5 334.49 L30.07 334.49 L30.07 354.33 L0 324.26 Z"
+						class="st2"/>
+			</g>
+			<path d="M0 324.26 L30.07 294.2 L30.07 314.04 L99.5 314.04 L99.5 334.49 L30.07 334.49 L30.07 354.33 L0 324.26 Z"
+					class="st3"/>
+			<text x="-91.75" y="328.92" transform="scale(-1,1)" class="st6" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>需求开发出来</text>		</g>
+		<g id="shape7-47" v:mID="7" v:groupContext="shape" transform="translate(70.9464,349.526) rotate(45) scale(1,-1)">
+			<title>45 度单向箭头.7</title>
+			<desc>需求开发完成</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="50.7781" cy="327.271" width="101.56" height="54.1187"/>
+			<g id="shadow7-48" v:groupContext="shadow" v:shadowOffsetX="1.44" v:shadowOffsetY="-1.44" v:shadowType="1"
+					transform="matrix(1,0,0,1,2.03647,-5.68434E-014)" class="st1">
+				<path d="M0 327.27 L27.06 300.21 L27.06 318.07 L101.56 318.07 L101.56 336.47 L27.06 336.47 L27.06 354.33 L0 327.27
+							 Z" class="st2"/>
+			</g>
+			<path d="M0 327.27 L27.06 300.21 L27.06 318.07 L101.56 318.07 L101.56 336.47 L27.06 336.47 L27.06 354.33 L0 327.27 Z"
+					class="st3"/>
+			<text x="8.78" y="-322.61" transform="scale(1,-1)" class="st6" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>需求开发完成</text>		</g>
+		<g id="shape8-53" v:mID="8" v:groupContext="shape" transform="translate(190.945,-77.2598)">
+			<title>工作表.8</title>
+			<desc>MVP架构</desc>
+			<v:userDefs>
+				<v:ud v:nameU="msvThemeColors" v:val="VT0(36):26"/>
+				<v:ud v:nameU="msvThemeEffects" v:val="VT0(16):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(2,2,2,2)" v:tabSpace="42.5197"/>
+			<v:textRect cx="50" cy="348.331" width="100" height="12"/>
+			<rect x="0" y="342.331" width="100" height="12" class="st7"/>
+			<text x="18.49" y="353.66" class="st8" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>MVP<tspan class="st9">架构</tspan></text>		</g>
+	</g>
+</svg>

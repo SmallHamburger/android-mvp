@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity implements IView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mPresenter = new Presenter(this);
 
         tv = (TextView) findViewById(R.id.tv);
