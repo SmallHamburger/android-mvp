@@ -564,6 +564,6 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
 
 
-  [1]: https://raw.githubusercontent.com/SmallHamburger/android-mvp/master/jesonmvp/doc/img/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [2]: https://raw.githubusercontent.com/SmallHamburger/android-mvp/master/jesonmvp/doc/img/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [3]: https://raw.githubusercontent.com/SmallHamburger/android-mvp/master/jesonmvp/doc/img/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [1]: http://jeson.info/open/android-mvp/raw/master/jesonmvp/doc/img/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [2]: http://jeson.info/open/android-mvp/raw/master/jesonmvp/doc/img/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [3]: http://jeson.info/open/android-mvp/raw/master/jesonmvp/doc/img/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
