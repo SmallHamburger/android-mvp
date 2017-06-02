@@ -18,7 +18,7 @@ MVP演化自MVC, 全称为 Model View Presenter.
 ## MVP架构
 以技术公司的客户(View), 销售(Presenter), 研发(Model)为模型
 
-![MVP架构示意图.svg-10.8kB][1]
+![MVP架构示意图][1]
 
 1. Presenter - 交互中间人
 Presenter作为View层和Model层的交互中间人, 同时**拥有View和Model成员变量**, 其犹如一位尽职的销售人员(Presenter), 接受客户的请求(View)并根据请求(View)寻找相应的研发人员(Model)进行开发, 研发人员(Model)开发完成通过销售人员(Presenter)将成果交付给客户(View).
@@ -564,6 +564,7 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
 
 
-  [1]: http://jeson.info/open/android-mvp/raw/master/jesonmvp/doc/img/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [2]: http://jeson.info/open/android-mvp/raw/master/jesonmvp/doc/img/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [3]: http://jeson.info/open/android-mvp/raw/master/jesonmvp/doc/img/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+
+  [1]: http://static.zybuluo.com/898801681/qgaa09mr7cpoop9ls4mr5kho/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [2]: http://static.zybuluo.com/898801681/fbye22yhffru68oy5j5cj509/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
+  [3]: http://static.zybuluo.com/898801681/tebryvlbbu5sx6b769vzlr7n/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
