@@ -1,8 +1,13 @@
 package com.jeson.mvp.presenter.impl;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
+import android.view.View;
 
 import com.jeson.mvp.IBasicHandler;
 import com.jeson.mvp.model.IBasicModel;
@@ -19,6 +24,12 @@ import java.util.Map;
 
 public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel> implements IBasicPresenter {
 
+    private static final String TAG = "BasicPresenter";
+
+    /**
+     * 检查自动销毁的间隔
+     */
+    private static final long DESTROY_CHECKER_DURATION = 1000;
     /**
      * 子线程回调call()时, 使接下来的代码运行在主线程
      */
@@ -42,6 +53,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
     private T mBasicView;
     private K mBasicModel;
     private android.os.Handler mUIHandler;
+    private boolean isDestroyed = false;
 
     public BasicPresenter(T view, K model) {
         mBasicView = view;
@@ -49,6 +61,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         mUIHandler = new Handler();
         mCalledStatus = new HashMap<>();
         mBasicModel.setWorkCallback(mWorkCallback);
+        mUIHandler.post(destroyRunnable);
     }
 
     /**
@@ -179,6 +192,41 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         }
     };
 
+    private Runnable destroyRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!isDestroyed && mBasicView != null) {
+                boolean isDestroyed = false;
+                do {
+                    if (mBasicView instanceof Activity) {
+                        isDestroyed = ((Activity) mBasicView).isFinishing();
+                        break;
+                    }
+                    if (mBasicView instanceof Fragment) {
+                        Activity activity = ((Fragment) mBasicView).getActivity();
+                        if (activity != null) {
+                            isDestroyed = activity.isFinishing();
+                            break;
+                        }
+                    }
+                    if (mBasicView instanceof View) {
+                        Context context = ((View) mBasicView).getContext();
+                        if (context != null && context instanceof Activity) {
+                            isDestroyed = ((Activity) context).isFinishing();
+                            break;
+                        }
+                    }
+                } while (false);
+                if (isDestroyed) {
+                    onDestroy();
+                    Log.i(TAG, "View is destroyed, presenter and model have been auto destroyed also");
+                } else {
+                    getHandler().postDelayed(this, DESTROY_CHECKER_DURATION);
+                }
+            }
+        }
+    };
+
     private class Handler extends android.os.Handler {
 
         private Handler() {
@@ -234,9 +282,12 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
     @Override
     public void onDestroy() {
-        mBasicModel.onDestroy();
-        mBasicView = null;
-        mBasicModel = null;
+        if (!isDestroyed) {
+            isDestroyed = true;
+            mBasicModel.onDestroy();
+            mBasicView = null;
+            mBasicModel = null;
+        }
     }
 
     @Override

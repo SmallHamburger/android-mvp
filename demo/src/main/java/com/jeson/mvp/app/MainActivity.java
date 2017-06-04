@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements IView{
+public class MainActivity extends AppCompatActivity implements IView {
 
     private IPresenter mPresenter;
     private TextView tv;
@@ -31,5 +31,11 @@ public class MainActivity extends AppCompatActivity implements IView{
     @Override
     public void onDataUpdate(Bundle data) {
         Toast.makeText(this, "hello " + time++, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        mPresenter.onDestroy();
     }
 }

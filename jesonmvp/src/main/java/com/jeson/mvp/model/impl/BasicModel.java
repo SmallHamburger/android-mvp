@@ -96,10 +96,11 @@ public abstract class BasicModel implements IBasicModel {
 
     @Override
     public void onDestroy() {
-        isDestroyed = true; //标记当前状态为destroyed
-        mExecutorService.shutdownNow(); //关闭线程池
-        mExecutorService = null;
-
+        if (!isDestroyed) {
+            isDestroyed = true; //标记当前状态为destroyed
+            mExecutorService.shutdownNow(); //关闭线程池
+            mExecutorService = null;
+        }
     }
 
     @Override
@@ -120,7 +121,9 @@ public abstract class BasicModel implements IBasicModel {
 
         @Override
         public void run() {
-            handleMessage(msg);
+            if (!isDestroyed) {
+                handleMessage(msg);
+            }
             msg.recycle();// Message对象没有经过Looper循环, 需要手动回收
         }
     }
