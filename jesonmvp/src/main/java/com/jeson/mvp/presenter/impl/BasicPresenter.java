@@ -192,6 +192,9 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         }
     };
 
+    /**
+     * 检查自动销毁
+     */
     private Runnable destroyRunnable = new Runnable() {
         @Override
         public void run() {
@@ -206,15 +209,15 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
                         Activity activity = ((Fragment) mBasicView).getActivity();
                         if (activity != null) {
                             isDestroyed = activity.isFinishing();
-                            break;
                         }
+                        break;
                     }
                     if (mBasicView instanceof View) {
                         Context context = ((View) mBasicView).getContext();
                         if (context != null && context instanceof Activity) {
                             isDestroyed = ((Activity) context).isFinishing();
-                            break;
                         }
+                        break;
                     }
                 } while (false);
                 if (isDestroyed) {
