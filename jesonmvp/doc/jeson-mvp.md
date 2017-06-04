@@ -53,14 +53,20 @@ View通常指Activity, Fragment或者某个View控件, 其**拥有**一个为其
 ## 简介
 Jeson-MVP除了MVP本身优势之外, 其还可以自动在Model层创建线程池, 使代码在子线程中运行; 而Prensenter层可以自动将Model层得到的数据灵活的在主线程或者子线程中使用; 其还可以自动销毁Presenter的View引用和Model层的线程池, 避免内存泄漏。
 
+项目地址: [Jeson-Android-MVP][4]
+
 ## 运行原理
 
 Jeson-MVP框架有三个阶段: 初始化阶段、任务处理阶段、销毁阶段。
 
 下面是Jeson_MVP_时序图, 运行流程如下
-![Jeson_MVP_时序图][4]
+![Jeson_MVP_时序图][5]
 
 # 接口和类
+
+相关类图如下: 
+
+![MVP类图][6]
 
 ## 接口
 
@@ -574,4 +580,6 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
   [1]: http://static.zybuluo.com/898801681/qgaa09mr7cpoop9ls4mr5kho/MVP%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
   [2]: http://static.zybuluo.com/898801681/fbye22yhffru68oy5j5cj509/MVC%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
   [3]: http://static.zybuluo.com/898801681/tebryvlbbu5sx6b769vzlr7n/MVVM%E6%9E%B6%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.svg
-  [4]: http://static.zybuluo.com/898801681/qjij674lhxfc745llqqi1x8s/Jeson_MVP_%E6%97%B6%E5%BA%8F%E5%9B%BE.svg
+  [4]: https://github.com/SmallHamburger/android-mvp
+  [5]: http://static.zybuluo.com/898801681/qjij674lhxfc745llqqi1x8s/Jeson_MVP_%E6%97%B6%E5%BA%8F%E5%9B%BE.svg
+  [6]: http://static.zybuluo.com/898801681/xgnzj2zqnj2dp2rmst9jvrch/MVP%E7%B1%BB%E5%9B%BE.svg
