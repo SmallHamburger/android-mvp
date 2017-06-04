@@ -192,6 +192,12 @@ public interface ILifeRecycle {
 ```java
 public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel> implements IBasicPresenter {
 
+    private static final String TAG = "BasicPresenter";
+
+    /**
+     * 检查自动销毁的间隔
+     */
+    private static final long DESTROY_CHECKER_DURATION = 1000;
     /**
      * 子线程回调call()时, 使接下来的代码运行在主线程
      */
@@ -215,6 +221,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
     private T mBasicView;
     private K mBasicModel;
     private android.os.Handler mUIHandler;
+    private boolean isDestroyed = false;
 
     public BasicPresenter(T view, K model) {
         mBasicView = view;
@@ -222,6 +229,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         mUIHandler = new Handler();
         mCalledStatus = new HashMap<>();
         mBasicModel.setWorkCallback(mWorkCallback);
+        mUIHandler.post(destroyRunnable);
     }
 
     /**
@@ -287,18 +295,18 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
     protected void onSuccessCalledOnWorkThread(int dataType, Bundle data) {
         mCalledStatus.put(Thread.currentThread().getId(), true);
     }
-    
+
     protected void onFailedCalledOnWorkThread(int dataType, Bundle data) {
         mCalledStatus.put(Thread.currentThread().getId(), true);
     }
-    
+
     protected void onFailedCalledOnUIThread(int dataType, Bundle data) {
     }
-    
+
     protected void onErrorCalledOnWorkThread(int dataType, Bundle data) {
         mCalledStatus.put(Thread.currentThread().getId(), true);
     }
-    
+
     protected void onErrorCalledOnUIThread(int dataType, Bundle data) {
     }
 
@@ -348,6 +356,41 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
             onErrorCalledOnWorkThread(dataType, data);
             if (mCalledStatus.get(Thread.currentThread().getId())) {
                 Message.obtain(mUIHandler, MSG_ON_ERROR_CALLED_ON_UI, dataType, 0, data).sendToTarget();
+            }
+        }
+    };
+
+    private Runnable destroyRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!isDestroyed && mBasicView != null) {
+                boolean isDestroyed = false;
+                do {
+                    if (mBasicView instanceof Activity) {
+                        isDestroyed = ((Activity) mBasicView).isFinishing();
+                        break;
+                    }
+                    if (mBasicView instanceof Fragment) {
+                        Activity activity = ((Fragment) mBasicView).getActivity();
+                        if (activity != null) {
+                            isDestroyed = activity.isFinishing();
+                            break;
+                        }
+                    }
+                    if (mBasicView instanceof View) {
+                        Context context = ((View) mBasicView).getContext();
+                        if (context != null && context instanceof Activity) {
+                            isDestroyed = ((Activity) context).isFinishing();
+                            break;
+                        }
+                    }
+                } while (false);
+                if (isDestroyed) {
+                    onDestroy();
+                    Log.i(TAG, "View is destroyed, presenter and model have been auto destroyed also");
+                } else {
+                    getHandler().postDelayed(this, DESTROY_CHECKER_DURATION);
+                }
             }
         }
     };
@@ -407,9 +450,12 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
     @Override
     public void onDestroy() {
-        mBasicModel.onDestroy();
-        mBasicView = null;
-        mBasicModel = null;
+        if (!isDestroyed) {
+            isDestroyed = true;
+            mBasicModel.onDestroy();
+            mBasicView = null;
+            mBasicModel = null;
+        }
     }
 
     @Override
@@ -445,7 +491,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 ### BasicModel
 
 ```java 
-public abstract class BasicModel implements ILifeRecycle, IBasicModel {
+public abstract class BasicModel implements IBasicModel {
 
     private static final String TAG = "BasicModel";
     /**
@@ -525,10 +571,11 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
     @Override
     public void onDestroy() {
-        isDestroyed = true; //标记当前状态为destroyed
-        mExecutorService.shutdownNow(); //关闭线程池
-        mExecutorService = null;
-
+        if (!isDestroyed) {
+            isDestroyed = true; //标记当前状态为destroyed
+            mExecutorService.shutdownNow(); //关闭线程池
+            mExecutorService = null;
+        }
     }
 
     @Override
@@ -549,7 +596,9 @@ public abstract class BasicModel implements ILifeRecycle, IBasicModel {
 
         @Override
         public void run() {
-            handleMessage(msg);
+            if (!isDestroyed) {
+                handleMessage(msg);
+            }
             msg.recycle();// Message对象没有经过Looper循环, 需要手动回收
         }
     }
