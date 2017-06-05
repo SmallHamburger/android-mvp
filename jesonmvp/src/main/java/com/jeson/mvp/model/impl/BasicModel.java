@@ -20,6 +20,10 @@ public abstract class BasicModel implements IBasicModel {
 
     private static final String TAG = "BasicModel";
     /**
+     * 主线程
+     */
+    public static final int MAIN_THREAD = -1;
+    /**
      * 自动调整线程数量
      */
     public static final int CACHED_THREAD = 0;
@@ -48,7 +52,9 @@ public abstract class BasicModel implements IBasicModel {
      * @param nThreads
      */
     public BasicModel(int nThreads) {
-        if (nThreads == CACHED_THREAD) {
+        if (nThreads == MAIN_THREAD) {
+            // do nothing
+        } else if (nThreads == CACHED_THREAD) {
             mExecutorService = Executors.newCachedThreadPool();
         } else if (nThreads == SINGLE_THREAD) {
             mExecutorService = Executors.newSingleThreadExecutor();
@@ -136,15 +142,22 @@ public abstract class BasicModel implements IBasicModel {
 
         public void dispatchMessage(Message msg) {
             if (!isDestroyed) {
-                if (msg.getCallback() != null) {
-                    // Looper会自动回收Message对象
-                    mExecutorService.execute(msg.getCallback());
+                if (mExecutorService == null) {
+                    super.dispatchMessage(msg);
                 } else {
-                    // Looper会自动回收msg对象, 所以需要一个新的Message对象供我们的子线程使用
-                    mExecutorService.execute(new Runnable(Message.obtain(msg)));
+                    if (msg.getCallback() != null) {
+                        // Looper会自动回收Message对象
+                        mExecutorService.execute(msg.getCallback());
+                    } else {
+                        // Looper会自动回收msg对象, 所以需要一个新的Message对象供我们的子线程使用
+                        mExecutorService.execute(new Runnable(Message.obtain(msg)));
+                    }
                 }
             }
-
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            BasicModel.this.handleMessage(msg);
         }
     }
 }
