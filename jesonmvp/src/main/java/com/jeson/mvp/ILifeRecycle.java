@@ -11,6 +11,7 @@ public interface ILifeRecycle {
 
     /**
      * 作用与Activity的onCreate(Bundle bundle)类似, 由presenter或者view层调用
+     *
      * @param bundle
      */
     void onCreate(Bundle bundle);
@@ -36,8 +37,19 @@ public interface ILifeRecycle {
     void onStop();
 
     /**
-     * 作用与Activity的onDestory类似, 由presenter或者view层调用
+     * 作用与Activity的onDestroy类似, 由presenter或者view层调用
      */
     void onDestroy();
+
+    enum LifeStatus {
+        ON_CREATE(1 << 0), ON_START(1 << 5), ON_RESUME(1 << 10), ON_PAUSE(1 << 15), ON_STOP(1 << 20), ON_DESTROY(1 << 25);
+
+        public final int value;
+
+        LifeStatus(int value) {
+            this.value = value;
+        }
+
+    }
 
 }

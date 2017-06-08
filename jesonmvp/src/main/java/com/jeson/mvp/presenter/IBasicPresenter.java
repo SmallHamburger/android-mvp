@@ -9,4 +9,16 @@ import com.jeson.mvp.ILifeRecycle;
  */
 
 public interface IBasicPresenter extends IBasicHandler, ILifeRecycle {
+
+    /**
+     * 手动回调结束当前Presenter
+     */
+    void finish();
+
+    /**
+     * 设置是否debug生命周期
+     * @param debugLifecycle
+     */
+    void setDebugLifecycle(boolean debugLifecycle);
+
 }
