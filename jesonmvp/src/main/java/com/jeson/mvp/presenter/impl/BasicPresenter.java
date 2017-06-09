@@ -93,13 +93,15 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         mBasicModel.setWorkCallback(mWorkCallback);
         // 将Presenter的生命周期托付给宿主Activity
         mHostActivity = getViewActivity();
-        Application application = mHostActivity.getApplication();
-        if (application == null) {
-            throw new NotCalledInCreateMethodException("BasicPresenter " + BasicPresenter.this
-                    + " did not call in activity's onCreate() or after activity's onCreate()");
+        if (mHostActivity != null) {
+            Application application = mHostActivity.getApplication();
+            if (application == null) {
+                throw new NotCalledInCreateMethodException("BasicPresenter " + BasicPresenter.this
+                        + " did not call in activity's onCreate() or after activity's onCreate()");
+            }
+            mActivityLifecycleCallbacks = new ActivityLifecycleCallbacks();
+            application.registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
         }
-        mActivityLifecycleCallbacks = new ActivityLifecycleCallbacks();
-        application.registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
     }
 
     /**
@@ -195,6 +197,9 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
         @Override
         public void call(int dataType, Bundle data) {
+            if (isDestroyed) {
+                return;
+            }
             mCalledStatus.put(Thread.currentThread().getId(), false);
             onWorkingCalledOnWorkThread(dataType, data);
             if (mCalledStatus.get(Thread.currentThread().getId())) {
@@ -204,6 +209,9 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
         @Override
         public void onSuccess(int dataType, Bundle data) {
+            if (isDestroyed) {
+                return;
+            }
             mCalledStatus.put(Thread.currentThread().getId(), false);
             onSuccessCalledOnWorkThread(dataType, data);
             if (mCalledStatus.get(Thread.currentThread().getId())) {
@@ -213,6 +221,9 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
         @Override
         public void onFailed(int dataType, Bundle data) {
+            if (isDestroyed) {
+                return;
+            }
             mCalledStatus.put(Thread.currentThread().getId(), false);
             onFailedCalledOnWorkThread(dataType, data);
             if (mCalledStatus.get(Thread.currentThread().getId())) {
@@ -222,6 +233,9 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
         @Override
         public void onError(int dataType, Bundle data) {
+            if (isDestroyed) {
+                return;
+            }
             mCalledStatus.put(Thread.currentThread().getId(), false);
             onErrorCalledOnWorkThread(dataType, data);
             if (mCalledStatus.get(Thread.currentThread().getId())) {
@@ -238,6 +252,9 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
 
         @Override
         public void handleMessage(Message msg) {
+            if (isDestroyed) {
+                return;
+            }
             switch (msg.what) {
                 case BasicPresenter.MSG_ON_WORKING_CALLED_ON_UI:
                     onWorkingCalledOnUIThread(msg.arg1, (Bundle) msg.obj);
@@ -513,7 +530,13 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         }
     }
 
-    public void setDebugLifecycle(boolean debugLifecycle) {
+
+    /**
+     * 设置是否debug生命周期
+     *
+     * @param debugLifecycle
+     */
+    protected void setDebugLifecycle(boolean debugLifecycle) {
         DEBUG_LIFECYCLE = debugLifecycle;
     }
 

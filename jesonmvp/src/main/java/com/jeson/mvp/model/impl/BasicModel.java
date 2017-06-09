@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.jeson.mvp.IBasicHandler;
-import com.jeson.mvp.ILifeRecycle;
 import com.jeson.mvp.model.IBasicModel;
 
 import java.util.concurrent.ExecutorService;

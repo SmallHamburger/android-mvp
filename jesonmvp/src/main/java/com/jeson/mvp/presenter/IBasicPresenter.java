@@ -15,10 +15,4 @@ public interface IBasicPresenter extends IBasicHandler, ILifeRecycle {
      */
     void finish();
 
-    /**
-     * 设置是否debug生命周期
-     * @param debugLifecycle
-     */
-    void setDebugLifecycle(boolean debugLifecycle);
-
 }
