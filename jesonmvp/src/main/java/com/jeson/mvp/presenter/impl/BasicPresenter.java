@@ -332,7 +332,6 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
                         throw new SuperNotCalledException("BasicPresenter " + BasicPresenter.this
                                 + " did not call through to super.onStop()");
                     }
-                    getBasicModel().onDestroy();
                     isDestroyed = true;
                     mBasicModel.onDestroy();
                     mHostActivity.getApplication().unregisterActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
