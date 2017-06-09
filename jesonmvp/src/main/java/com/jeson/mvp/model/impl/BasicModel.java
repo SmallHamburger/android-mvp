@@ -75,7 +75,6 @@ public abstract class BasicModel implements IBasicModel {
         }
         mWorkHandler = new Handler();
         mUIHandler = new UIHandler();
-        //从任务队列中读取任务交给线程去执行
     }
 
     protected android.os.Handler getWorkHandler() {
@@ -128,6 +127,8 @@ public abstract class BasicModel implements IBasicModel {
                 mExecutorService.shutdownNow(); //关闭线程池
                 mExecutorService = null;
             }
+            mWorkHandler = null;
+            mUIHandler = null;
         }
     }
 

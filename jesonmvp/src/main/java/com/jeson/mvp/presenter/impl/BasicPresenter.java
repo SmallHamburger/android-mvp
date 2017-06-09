@@ -339,6 +339,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
                     mBasicView = null;
                     mBasicModel = null;
                     mHostActivity = null;
+                    mUIHandler = null;
                     mLifeStatus = LifeStatus.ON_DESTROY;
                 }
                 break;
@@ -540,7 +541,7 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         DEBUG_LIFECYCLE = debugLifecycle;
     }
 
-    protected boolean isDestroyed(){
+    protected boolean isDestroyed() {
         return isDestroyed;
     }
 
