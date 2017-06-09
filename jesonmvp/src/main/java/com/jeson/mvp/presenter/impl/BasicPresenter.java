@@ -23,7 +23,7 @@ import java.util.Map;
 public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel> implements IBasicPresenter {
 
     private static final String TAG = "BasicPresenter";
-    private static boolean DEBUG_LIFECYCLE = true;
+    private static boolean DEBUG_LIFECYCLE = false;
     /**
      * 检查自动销毁的间隔
      */
