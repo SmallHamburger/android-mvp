@@ -30,12 +30,25 @@ public abstract class BasicModel implements IBasicModel {
      * 单线程
      */
     public static final int SINGLE_THREAD = 1;
+    /**
+     * 标记当前Model是否被销毁
+     */
     private boolean isDestroyed = false;
+    /**
+     * 线程池
+     */
     private ExecutorService mExecutorService;
     /**
      * 用于子类传送消息, 运行在主线程, handleMessage()会推送至线程池中运行
      */
-    private Handler mWorkHandler;
+    private android.os.Handler mWorkHandler;
+    /**
+     * 用于子类传送消息, 运行在主线程, handleMessage()会在主线程中运行
+     */
+    private android.os.Handler mUIHandler;
+    /**
+     * 工作回调
+     */
     private IBasicHandler.Callback mWorkingCallback;
 
     /**
@@ -61,11 +74,16 @@ public abstract class BasicModel implements IBasicModel {
             mExecutorService = Executors.newFixedThreadPool(nThreads);
         }
         mWorkHandler = new Handler();
+        mUIHandler = new UIHandler();
         //从任务队列中读取任务交给线程去执行
     }
 
     protected android.os.Handler getWorkHandler() {
         return mWorkHandler;
+    }
+
+    protected android.os.Handler getUIHandler() {
+        return mUIHandler;
     }
 
     @Override
@@ -78,6 +96,9 @@ public abstract class BasicModel implements IBasicModel {
     }
 
     protected abstract void handleMessage(Message msg);
+
+    protected void handleMessageOnUIThread(Message msg) {
+    }
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -103,9 +124,15 @@ public abstract class BasicModel implements IBasicModel {
     public void onDestroy() {
         if (!isDestroyed) {
             isDestroyed = true; //标记当前状态为destroyed
-            mExecutorService.shutdownNow(); //关闭线程池
-            mExecutorService = null;
+            if (mExecutorService != null) {
+                mExecutorService.shutdownNow(); //关闭线程池
+                mExecutorService = null;
+            }
         }
+    }
+
+    protected boolean isDestroyed() {
+        return isDestroyed;
     }
 
     @Override
@@ -133,6 +160,18 @@ public abstract class BasicModel implements IBasicModel {
         }
     }
 
+    private class UIHandler extends android.os.Handler {
+
+        public UIHandler() {
+            super(Looper.getMainLooper());
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            BasicModel.this.handleMessageOnUIThread(msg);
+        }
+    }
+
     private class Handler extends android.os.Handler {
 
         public Handler() {
@@ -154,6 +193,7 @@ public abstract class BasicModel implements IBasicModel {
                 }
             }
         }
+
         @Override
         public void handleMessage(Message msg) {
             BasicModel.this.handleMessage(msg);
