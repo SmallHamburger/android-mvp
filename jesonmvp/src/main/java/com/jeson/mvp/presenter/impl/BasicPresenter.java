@@ -540,4 +540,8 @@ public abstract class BasicPresenter<T extends IBasicView, K extends IBasicModel
         DEBUG_LIFECYCLE = debugLifecycle;
     }
 
+    protected boolean isDestroyed(){
+        return isDestroyed;
+    }
+
 }
